@@ -1,0 +1,16 @@
+{
+  "id": 1,
+  "moves": 20,
+  "boardSize": 8,
+  "customers": [
+    {
+      "id": "maria",
+      "name": "Maria",
+      "dish": "Pizza",
+      "requirements": [
+        { "ingredient": "tomato", "amount": 5 },
+        { "ingredient": "cheese", "amount": 3 }
+      ]
+    }
+  ]
+}

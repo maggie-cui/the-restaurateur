@@ -1,0 +1,88 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #1a1a2e;
+  color: #eee;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.screen {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 24px;
+  text-align: center;
+}
+
+.level-label {
+  font-size: 1.25rem;
+  margin: 1rem 0 2rem;
+}
+
+.order-panel {
+  text-align: left;
+  margin-bottom: 16px;
+}
+
+.customer-order h2 {
+  font-size: 1rem;
+  margin: 0 0 8px;
+}
+
+.customer-order ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+}
+
+.customer-order li {
+  padding: 4px 0;
+}
+
+.board-placeholder {
+  background: #16213e;
+  border-radius: 12px;
+  padding: 48px 24px;
+  margin: 16px 0;
+}
+
+.moves {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.dev-buttons {
+  margin-top: 16px;
+}
+
+button {
+  margin: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background: #e94560;
+  color: white;
+}
+
+button:hover {
+  background: #ff6b6b;
+}
+
+.summary-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 2rem;
+}
+
+.muted {
+  color: #888;
+}

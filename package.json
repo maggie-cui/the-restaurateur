@@ -1,0 +1,14 @@
+{
+  "name": "the-restaurateur",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w @restaurateur/web",
+    "build": "npm run build -w @restaurateur/web",
+    "test": "npm run test -w @restaurateur/game-engine",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  }
+}
