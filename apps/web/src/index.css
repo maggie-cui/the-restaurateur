@@ -53,6 +53,22 @@ body {
   margin: 16px 0;
 }
 
+.game-board {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 16px auto;
+  border-radius: 12px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.game-message {
+  color: #ff6b6b;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
 .moves {
   font-size: 1.1rem;
   font-weight: 600;
@@ -77,10 +93,42 @@ button:hover {
   background: #ff6b6b;
 }
 
+.game-screen {
+  padding-top: 12px;
+}
+
+.game-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.game-header .level-label {
+  margin: 0;
+}
+
+.text-button {
+  background: transparent;
+  color: #aaa;
+  padding: 8px 0;
+  margin: 0;
+}
+
+.text-button:hover {
+  background: transparent;
+  color: #fff;
+}
+
 .summary-list {
   list-style: none;
   padding: 0;
   margin: 1rem 0 2rem;
+  text-align: left;
+}
+
+.summary-list li {
+  padding: 6px 0;
 }
 
 .muted {

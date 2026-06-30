@@ -22,8 +22,12 @@ export interface CustomerProgress {
 export interface GameState {
   phase: GamePhase;
   levelId: number;
+  /** Seed for deterministic board refills during a level. */
+  seed: number;
   board: Tile[][];
   pantry: Record<IngredientId, number>;
   customers: CustomerProgress[];
   movesRemaining: number;
+  /** Starting move limit for this level (used on end screens). */
+  movesTotal: number;
 }

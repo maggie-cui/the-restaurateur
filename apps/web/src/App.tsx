@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { createMockGameState } from '@restaurateur/game-engine';
+import { createGame } from '@restaurateur/game-engine';
+import type { GameState } from '@restaurateur/game-engine';
 import { LEVEL_1 } from './data/level1';
 import { HomeScreen } from './screens/HomeScreen';
 import { GameScreen } from './screens/GameScreen';
@@ -11,13 +12,18 @@ type Screen = 'home' | 'game' | 'complete' | 'failed';
 export default function App() {
   const [screen, setScreen] = useState<Screen>('home');
   const [currentLevel, setCurrentLevel] = useState(1);
-  const mockState = createMockGameState(LEVEL_1);
+  const [gameState, setGameState] = useState<GameState>(() => createGame(LEVEL_1));
+
+  const startLevel = () => {
+    setGameState(createGame(LEVEL_1));
+    setScreen('game');
+  };
 
   if (screen === 'home') {
     return (
       <HomeScreen
         level={currentLevel}
-        onStart={() => setScreen('game')}
+        onStart={startLevel}
       />
     );
   }
@@ -25,7 +31,8 @@ export default function App() {
   if (screen === 'game') {
     return (
       <GameScreen
-        state={mockState}
+        state={gameState}
+        onStateChange={setGameState}
         onWin={() => setScreen('complete')}
         onLose={() => setScreen('failed')}
         onHome={() => setScreen('home')}
@@ -36,19 +43,20 @@ export default function App() {
   if (screen === 'complete') {
     return (
       <LevelCompleteScreen
-        pantry={mockState.pantry}
+        state={gameState}
         onNext={() => {
           setCurrentLevel((level) => level + 1);
           setScreen('home');
         }}
-        onReplay={() => setScreen('game')}
+        onReplay={startLevel}
       />
     );
   }
 
   return (
     <LevelFailedScreen
-      onRetry={() => setScreen('game')}
+      state={gameState}
+      onRetry={startLevel}
       onHome={() => setScreen('home')}
     />
   );

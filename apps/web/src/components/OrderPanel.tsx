@@ -1,5 +1,5 @@
 import type { CustomerProgress } from '@restaurateur/game-engine';
-import { INGREDIENT_EMOJI } from '@restaurateur/game-engine';
+import { INGREDIENT_EMOJI, formatIngredientName } from '@restaurateur/game-engine';
 
 type OrderPanelProps = {
   customers: CustomerProgress[];
@@ -16,7 +16,8 @@ export function OrderPanel({ customers }: OrderPanelProps) {
           <ul>
             {customer.lines.map((line) => (
               <li key={line.ingredient}>
-                {INGREDIENT_EMOJI[line.ingredient]} {line.ingredient}{' '}
+                {INGREDIENT_EMOJI[line.ingredient]}{' '}
+                {formatIngredientName(line.ingredient)}{' '}
                 {line.delivered}/{line.required} {line.complete ? '✅' : ''}
               </li>
             ))}

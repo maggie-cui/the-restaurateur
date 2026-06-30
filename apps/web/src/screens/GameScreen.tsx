@@ -1,38 +1,69 @@
-import type { GameState } from '@restaurateur/game-engine';
+import { useState } from 'react';
+import type { GameState, Coord } from '@restaurateur/game-engine';
+import { trySwap } from '@restaurateur/game-engine';
 import { OrderPanel } from '../components/OrderPanel';
+import { BoardCanvas } from '../components/BoardCanvas';
 
 type GameScreenProps = {
   state: GameState;
+  onStateChange: (state: GameState) => void;
   onWin: () => void;
   onLose: () => void;
   onHome: () => void;
 };
 
-export function GameScreen({ state, onWin, onLose, onHome }: GameScreenProps) {
+export function GameScreen({
+  state,
+  onStateChange,
+  onWin,
+  onLose,
+  onHome,
+}: GameScreenProps) {
+  const [message, setMessage] = useState<string | null>(null);
+
+  const handleSwap = (from: Coord, to: Coord) => {
+    if (state.phase !== 'playing') {
+      return;
+    }
+
+    const result = trySwap(state, from, to);
+
+    if (!result.ok) {
+      if (result.reason === 'no_match') {
+        setMessage('No match — try another swap');
+      }
+      return;
+    }
+
+    setMessage(null);
+    onStateChange(result.state);
+
+    if (result.state.phase === 'won') {
+      onWin();
+      return;
+    }
+
+    if (result.state.phase === 'lost') {
+      onLose();
+    }
+  };
+
   return (
     <main className="screen game-screen">
+      <div className="game-header">
+        <button type="button" className="text-button" onClick={onHome}>
+          ← Home
+        </button>
+        <p className="level-label">Level {state.levelId}</p>
+      </div>
+
       <OrderPanel customers={state.customers} />
 
-      <div className="board-placeholder">
-        <p>8 × 8 board (placeholder)</p>
-        <p>
-          {state.board.length} × {state.board[0]?.length ?? 0} grid
-        </p>
-      </div>
+      <BoardCanvas board={state.board} onSwap={handleSwap} />
+
+      {message ? <p className="game-message">{message}</p> : null}
 
       <p className="moves">Moves remaining: {state.movesRemaining}</p>
-
-      <div className="dev-buttons">
-        <button type="button" onClick={onWin}>
-          Mock Win
-        </button>
-        <button type="button" onClick={onLose}>
-          Mock Lose
-        </button>
-        <button type="button" onClick={onHome}>
-          Home
-        </button>
-      </div>
     </main>
   );
 }

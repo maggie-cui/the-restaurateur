@@ -19,6 +19,8 @@ npm run build
 - `content/levels` — level JSON definitions
 - `docs/PRD.md` — product requirements
 
-## Milestone 0 status
+## Milestone 4 status
 
-Static screens with mock data. Use **Mock Win** / **Mock Lose** on the game screen to test navigation.
+Level 1 is playable start to finish. Complete Maria's pizza order to win; run out of moves first and you lose. End screens show real order stats (no mock buttons).
+
+Run `npm run dev` → **Start Cooking** → match ingredients until Maria is served or moves run out.

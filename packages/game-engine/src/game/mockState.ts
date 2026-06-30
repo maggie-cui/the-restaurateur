@@ -1,8 +1,9 @@
 import { INGREDIENT_IDS } from '../types';
 import type { GameState, LevelConfig } from '../types';
+import { emptyPantry } from '../inventory/pantry';
 
-function emptyPantry(): GameState['pantry'] {
-  return Object.fromEntries(INGREDIENT_IDS.map((id) => [id, 0])) as GameState['pantry'];
+function emptyPantryState(): GameState['pantry'] {
+  return emptyPantry();
 }
 
 export function createMockGameState(level: LevelConfig): GameState {
@@ -27,9 +28,11 @@ export function createMockGameState(level: LevelConfig): GameState {
   return {
     phase: 'playing',
     levelId: level.id,
+    seed: level.id * 1009,
     board,
-    pantry: emptyPantry(),
+    pantry: emptyPantryState(),
     customers,
     movesRemaining: level.moves,
+    movesTotal: level.moves,
   };
 }

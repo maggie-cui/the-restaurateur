@@ -32,6 +32,8 @@ describe('createMockGameState', () => {
 
     expect(state.levelId).toBe(1);
     expect(state.movesRemaining).toBe(20);
+    expect(state.movesTotal).toBe(20);
+    expect(state.seed).toBe(1009);
     expect(state.board).toHaveLength(8);
     expect(state.customers[0]?.name).toBe('Maria');
     expect(state.customers[0]?.lines[0]).toMatchObject({
